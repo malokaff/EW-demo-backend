@@ -1,0 +1,30 @@
+2022-06-15 15:07:24,755 - MQTT_PYTHON - INFO - In wait loop
+2022-06-15 15:07:24,755 - MQTT_PYTHON - INFO - Connected to MQTT Broker!
+2022-06-15 15:07:25,756 - MQTT_PYTHON - INFO - in Main Loop
+2022-06-15 15:08:23,751 - MQTT_PYTHON - ERROR - Got exception on main handler
+Traceback (most recent call last):
+  File "/home/pensando/mqtt-publish.py", line 88, in <module>
+    run()
+  File "/home/pensando/mqtt-publish.py", line 68, in run
+    publish(client)
+  File "/home/pensando/mqtt-publish.py", line 42, in publish
+    time.sleep(1)
+KeyboardInterrupt
+2022-06-15 15:08:27,965 - MQTT_PYTHON - INFO - In wait loop
+2022-06-15 15:08:27,965 - MQTT_PYTHON - INFO - Connected to MQTT Broker!
+2022-06-15 15:08:28,966 - MQTT_PYTHON - INFO - in Main Loop
+2022-06-15 17:14:00,796 - MQTT_PYTHON - INFO - In wait loop
+2022-06-15 17:14:00,797 - MQTT_PYTHON - INFO - Connected to MQTT Broker!
+2022-06-15 17:14:01,798 - MQTT_PYTHON - INFO - in Main Loop
+2022-06-15 17:14:04,755 - MQTT_PYTHON - ERROR - Got exception on main handler
+Traceback (most recent call last):
+  File "/home/pensando/mqtt-publish.py", line 88, in <module>
+    run()
+  File "/home/pensando/mqtt-publish.py", line 68, in run
+    publish(client)
+  File "/home/pensando/mqtt-publish.py", line 42, in publish
+    time.sleep(1)
+KeyboardInterrupt
+2022-06-15 17:14:07,654 - MQTT_PYTHON - INFO - In wait loop
+2022-06-15 17:14:07,654 - MQTT_PYTHON - INFO - Connected to MQTT Broker!
+2022-06-15 17:14:08,655 - MQTT_PYTHON - INFO - in Main Loop
