@@ -54,20 +54,11 @@ def connect_mqtt():
 	client = mqtt_client.Client(client_id,False)
 	client.username_pw_set(username, password)
 	client.on_connect = on_connect
-	try:
-		client.connect(broker, port)
-	except:
-		my_logger.exception('Got exception in connect_mqtt function')
+	client.connect(broker, port)
 	return client
 		
 def publish(client,msg,topic):
 	msg = msg
-	mqtt_client.Client.connected_flag = False #create flag in class
-	client.loop_start()
-	while not client.connected_flag: #wait in loop
-		my_logger.info("wait for mqtt connexion")
-		time.sleep(1)
-	my_logger.info("connexion mqtt ok")
 	result = client.publish(topic, msg)
 	# result: [0, 1]
 	status = result[0]
@@ -79,8 +70,6 @@ def publish(client,msg,topic):
 	else:
 		#topic= format(topic)
 		my_logger.info("Failed to send message to topic " + topic)
-	client.loop_stop()    #Stop loop 
-	
 
 
 
@@ -94,18 +83,16 @@ def run():
 		count=format(msg_count)
 		now = int( time.time() )
 		now_format=format(now)
-		msg = now_format +' - message ' + count
-		client = connect_mqtt()
-		publish(client, msg, "python/mqtt-pensando")
-		client.disconnect() # disconnect
-		#updateValue(msg)
+		msg = now_format +' - SQL ' + count
+		#publish(client, msg, "python/mqtt-pensando")
+		updateValue(msg)
 		msg_count += 1
-	
-
+		
+		
 
 
 if __name__ == '__main__':
-	LOG_FILENAME = '/home/pensando/logging-python.log'
+	LOG_FILENAME = '/home/pensando/logging-sql.log'
 	# definition du logging
 	my_logger = logging.getLogger('MQTT_PYTHON')
 	my_logger.setLevel(logging.DEBUG)
