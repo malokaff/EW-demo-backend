@@ -4,7 +4,7 @@ import random
 import time
 import logging
 import logging.handlers
-import password
+import config
 import mysql.connector
 import time
 
@@ -14,34 +14,15 @@ from paho.mqtt import client as mqtt_client
 
 sql_pass = password.pwd_mysql
 
-broker = '10.29.21.15'
+broker = config.ip_mqttbroker
 port = 1883
 topic = "python/mqtt-pensando"
 # generate client ID with pub prefix randomly
 id=format(random.randint(0, 1000))
 #client_id = fstring('python-mqtt-{random.randint(0, 1000)}')
 client_id = 'python-mqtt-' + id
-username = 'mqtt'
-password = password.pwd_mysql
-
-def updateValue(value):
-	try:
-		my_logger.info("updateValue: {}" + value)
-		conn = mysql.connector.connect(host="10.29.21.15",user="root",password=sql_pass, database="MQTT")
-		cursor = conn.cursor()
-		global_connect_timeout = 'SET GLOBAL connect_timeout=10'
-		global_wait_timeout = 'SET GLOBAL connect_timeout=10'
-		global_interactive_timeout = 'SET GLOBAL connect_timeout=10'
-		cursor.execute(global_connect_timeout) 
-		cursor.execute(global_wait_timeout)
-		cursor.execute(global_interactive_timeout)
-		cursor.execute("""UPDATE `mqtt-value` SET value='%s' WHERE id='1'""" % (value))
-		cursor.execute("commit")
-		cursor.close()
-	except mysql.connector.Error as err:
-		my_logger.info("ERROR SQL :Something went wrong in function updateValue: {}", err)
-		my_logger.exception('Got exception in updateValue function')
-
+username = config.usr_mqtt
+password = config.pwd_mysql
 
 def connect_mqtt():
 	def on_connect(client, userdata, flags, rc):
