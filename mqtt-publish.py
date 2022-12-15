@@ -12,7 +12,7 @@ import time
 from paho.mqtt import client as mqtt_client
 #from fstring import fstring
 
-sql_pass = password.pwd_mysql
+sql_pass = config.pwd_mysql
 
 broker = config.ip_mqttbroker
 port = 1883
