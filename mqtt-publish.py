@@ -82,6 +82,7 @@ def run():
 		publish(client, msg, "python/mqtt-pensando")
 		if nb_session == ratio_session:
 			client.disconnect() # disconnect
+			nb_session = 0
 		#updateValue(msg)
 		msg_count += 1
 	

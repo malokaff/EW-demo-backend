@@ -21,8 +21,9 @@ id=format(random.randint(0, 1000))
 client_id = 'python-mqtt-' + id
 username = config.user_mysql
 password = config.pwd_mysql
+ratio_session = config.ratio_session
 
-def updateValue(value):
+def updateValue(value,nb_session):
 	try:
 		my_logger.info("updateValue: {}" + value)
 		conn = mysql.connector.connect(host=mysql_server,user=username,password=password, database="MQTT")
@@ -30,7 +31,9 @@ def updateValue(value):
 		#cursor.execute("SET GLOBAL connect_timeout=1")
 		cursor.execute("""UPDATE `mqtt-value` SET value='%s' WHERE id='1'""" % (value))
 		cursor.execute("commit")
-		cursor.close()
+		if nb_session == ratio_session:
+			cursor.close()
+			nb_session = 0
 	except mysql.connector.Error as err:
 		my_logger.info("ERROR SQL :Something went wrong in function updateValue: {}", err)
 		my_logger.exception('Got exception in updateValue function')
@@ -38,6 +41,7 @@ def updateValue(value):
 
 def run():
 	msg_count = 0
+	nb_session = 0
 	while True:
 		time.sleep(1)
 		if msg_count > 100:
@@ -48,7 +52,7 @@ def run():
 		now_format=format(now)
 		msg = now_format +' - SQL ' + count
 		#publish(client, msg, "python/mqtt-pensando")
-		updateValue(msg)
+		updateValue(msg,nb_session)
 		msg_count += 1
 		
 		
