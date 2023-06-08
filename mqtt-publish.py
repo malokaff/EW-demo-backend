@@ -23,6 +23,7 @@ id=format(random.randint(0, 1000))
 client_id = 'python-mqtt-' + id
 username = config.usr_mqtt
 password = config.pwd_mysql
+ratio_session = config.ratio_session
 
 def connect_mqtt():
 	def on_connect(client, userdata, flags, rc):
@@ -67,6 +68,7 @@ def publish(client,msg,topic):
 
 def run():
 	msg_count = 0
+	nb_session = 0
 	while True:
 		time.sleep(1)
 		if msg_count > 100:
@@ -78,7 +80,8 @@ def run():
 		msg = now_format +' - message ' + count
 		client = connect_mqtt()
 		publish(client, msg, "python/mqtt-pensando")
-		client.disconnect() # disconnect
+		if nb_session == ratio_session:
+			client.disconnect() # disconnect
 		#updateValue(msg)
 		msg_count += 1
 	
