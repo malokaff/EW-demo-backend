@@ -5,3 +5,4 @@ user_mysql = 'root'
 pwd_mysql='xxx'
 usr_mqtt = 'mqtt'
 pwd_mqtt = 'xxx'
+ratio_session = 10
