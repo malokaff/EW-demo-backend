@@ -59,7 +59,7 @@ def run():
 
 
 if __name__ == '__main__':
-	LOG_FILENAME = '/home/pensando/logging-sql.log'
+	LOG_FILENAME = 'logging-sql.log'
 	# definition du logging
 	my_logger = logging.getLogger('MQTT_PYTHON')
 	my_logger.setLevel(logging.DEBUG)
