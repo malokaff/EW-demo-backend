@@ -33,7 +33,7 @@ def connect_mqtt():
 		else:
 			my_logger.info("Failed to connect, return code %d\n", rc)
 
-	client = mqtt_client.Client(client_id,False)
+	client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION1,client_id,False)
 	client.username_pw_set(username, password)
 	client.on_connect = on_connect
 	try:
@@ -90,7 +90,7 @@ def run():
 
 
 if __name__ == '__main__':
-	LOG_FILENAME = '/home/pensando/logging-python.log'
+	LOG_FILENAME = 'logging-python.log'
 	# definition du logging
 	my_logger = logging.getLogger('MQTT_PYTHON')
 	my_logger.setLevel(logging.DEBUG)
