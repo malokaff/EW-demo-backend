@@ -26,7 +26,7 @@ ratio_session = config.ratio_session
 def updateValue(value,nb_session):
 	try:
 		my_logger.info("updateValue: {}" + value)
-		conn = mysql.connector.connect(host=mysql_server,user=username,password=password, database="MQTT")
+		conn = mysql.connector.connect(host=mysql_server,user=username,password=password, database="MQTT",connect_timeout=10)
 		cursor = conn.cursor()
 		#cursor.execute("SET GLOBAL connect_timeout=1")
 		cursor.execute("""UPDATE `mqtt-value` SET value='%s' WHERE id='1'""" % (value))
